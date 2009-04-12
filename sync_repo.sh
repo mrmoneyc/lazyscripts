@@ -63,6 +63,9 @@ read -p "What do you want to do now? Please enter the number:" ACT
    choice_branch
    git pull $URL $BRANCH && push_repo
    ;;
+   "q")
+   exit
+   ;;
    *)
    echo "Please enter a number."
    ;;
