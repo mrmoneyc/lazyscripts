@@ -3,9 +3,9 @@
 Here store the command which only in Fedora
 """
 
-detect_pack = "rpm -q"
-install_cmd = "yum -y install"
-remove_cmd = "yum -y remove"
+detect_pack = "rpm -q "
+install_cmd = "yum -y install "
+remove_cmd = "yum -y remove "
 network_config = ""
 repo_config = ""
 

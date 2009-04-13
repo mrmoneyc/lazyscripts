@@ -18,6 +18,11 @@ if which lsb_release ; then
     echo "export DISTRIB_CODENAME=`lsb_release -cs`" >> "$ENV_EXPORT_SCRIPT"
     echo "export DISTRIB_VERSION=`lsb_release -rs`" >> "$ENV_EXPORT_SCRIPT"
     echo "export DISTRIB_ID=`lsb_release -is`" >> "$ENV_EXPORT_SCRIPT"
+elif grep "Fedora" /etc/issue ; then
+    export DISTRIB_ID="Fedora"
+    echo "export DISTRIB_CODENAME=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
+    export DISTRIB_CODENAME=""
+    export DISTRIB_VERSION=""
 else
     echo "Sorry, Lazyscripts can't distinguish your Linux distribution."
     echo "Please choice your distribution in the list."
@@ -116,23 +121,20 @@ case "$DISTRIB_ID" in
     "Fedora")
     export PLAT_NAME="`uname -i`"
     echo "export PLAT_NAME=\"`uname -i`\"" >> $ENV_EXPORT_SCRIPT
+    
+    if [ -z "$DISTRIB_VERSION" ];then
 
-    DISTRIB_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Fedora 10"`
-    case $DISTRIB_VERSION in
-        "Fedora 10")
-        export DISTRIB_VERSION="10"
-        ;;
-    esac
-    echo "export DISTRIB_VERSION=${DISTRIB_VERSION}" >> $ENV_EXPORT_SCRIPT
-
+        DISTRIB_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Fedora 10"`
+        case $DISTRIB_VERSION in
+            "Fedora 10")
+            export DISTRIB_VERSION="10"
+            ;;
+        esac
+        echo "export DISTRIB_VERSION=${DISTRIB_VERSION}" >> $ENV_EXPORT_SCRIPT
+    fi
     WIN_MGR=`zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE"`
     export WIN_MGR=${WIN_MGR}
     echo "export WIN_MGR=${WIN_MGR}" >> $ENV_EXPORT_SCRIPT
-    case $DISTRIB_VERSION in 
-         "Fedora 10")
-         DISTRIB_VERSION="10"
-         ;;
-    esac 
 cat >> ${ENV_EXPORT_SCRIPT} << EOF
 if [ -f "/var/run/yum.pid" ]; then
     echo "Remove the lock file"
@@ -140,7 +142,7 @@ if [ -f "/var/run/yum.pid" ]; then
     rm -f /var/run/yum.pid
 fi  
 EOF
-    if rpm -q python-nose python-setuptools-devel git-core ; then
+    if rpm -q python-nose python-setuptools-devel git-core redhat-lsb ; then
         echo "Require packages installed."
     else
         echo "Require packages not installed."
@@ -150,7 +152,7 @@ EOF
     ;;
     *)
     zenity --info --text "Sorry, Lazyscripts not support your Distribution. The program will exit"
-    rm $ENV_EXPORT_SCRIPT
+    rm ${ENV_EXPORT_SCRIPT}
     exit
     ;;
 esac
