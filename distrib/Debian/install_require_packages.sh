@@ -20,7 +20,6 @@ source /etc/profile
 
 apt-get update
 apt-get -y --force-yes install git-core python-setuptools python-nose make
-easy_install GitPython
 
 cd $TOPDIR
 

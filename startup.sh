@@ -1,7 +1,7 @@
 #!/bin/bash
+# -*- coding: UTF-8 -*-
+# This is a startup file for Lazyscripts
 
-DEB_SCRIPTS_REPO='git://github.com/billy3321/lazyscripts_pool_debian_ubuntu.git'
-SUSE_SCRIPTS_REPO='git://github.com/mrmoneyc/lazyscripts_pool_opensuse.git'
 
 function get_distro_info () {
 if which lsb_release ; then
@@ -76,79 +76,8 @@ get_distro_info
 
 
 case "$DISTRIB_ID" in
-    "Ubuntu" | "Debian")
-        export PLAT_NAME="`uname -a | cut -d " " -f 12`"
-        echo "export PLAT_NAME=\"`uname -a | cut -d " " -f 12`\"" >> $ENV_EXPORT_SCRIPT
-	export SCRIPTS_REPO=$DEB_SCRIPTS_REPO
-	echo "SCRIPTS_REPO='${SCRIPTS_REPO}'" >> $ENV_EXPORT_SCRIPT
-        echo "Check for required packsges..."
-        if dpkg -l python-nose python-setuptools git-core ; then
-            echo "Require packages installed."
-        else
-            echo "Require packages not installed."
-            echo "distrib/${DISTRIB_ID}/install_require_packages.sh " >> $ENV_EXPORT_SCRIPT
-        fi
-        
-    ;;
-    "openSUSE")
-    export PLAT_NAME="`uname -i`"
-    echo "export PLAT_NAME=\"`uname -i`\"" >> $ENV_EXPORT_SCRIPT
-	export SCRIPTS_REPO=$SUSE_SCRIPTS_REPO
-	echo "SCRIPTS_REPO='${SCRIPTS_REPO}'" >> $ENV_EXPORT_SCRIPT
-    case $WINDOWMANAGER in
-        '/usr/bin/gnome')
-        export WIN_MGR='Gnome'
-        echo "export WIN_MGR=\"Gnome\"" >> $ENV_EXPORT_SCRIPT
-        ;;
-        '/usr/bin/startkde')
-        export WIN_MGR='KDE'
-        echo "export WIN_MGR=\"KDE\"" >> $ENV_EXPORT_SCRIPT
-        ;;
-        *)
-        echo "Lazysciprs can't identified your window manager"
-        export WIN_MGR=''
-        echo "export WIN_MGR=\"\"" >> $ENV_EXPORT_SCRIPT
-        ;;
-    esac
-    if rpm -q python-nose python-setuptools git-core ; then 
-        echo "Require packages installed."
-    else
-        echo "Require packages not installed."
-        echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
-    fi 
-    ;;
-    
-    "Fedora")
-    export PLAT_NAME="`uname -i`"
-    echo "export PLAT_NAME=\"`uname -i`\"" >> $ENV_EXPORT_SCRIPT
-    
-    if [ -z "$DISTRIB_VERSION" ];then
-
-        DISTRIB_VERSION=`zenity --list --title="Choice your linux distribution version" --radiolist --column "" --column "Linux Distribution Version" FALSE "Fedora 10"`
-        case $DISTRIB_VERSION in
-            "Fedora 10")
-            export DISTRIB_VERSION="10"
-            ;;
-        esac
-        echo "export DISTRIB_VERSION=${DISTRIB_VERSION}" >> $ENV_EXPORT_SCRIPT
-    fi
-    WIN_MGR=`zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE"`
-    export WIN_MGR=${WIN_MGR}
-    echo "export WIN_MGR=${WIN_MGR}" >> $ENV_EXPORT_SCRIPT
-cat >> ${ENV_EXPORT_SCRIPT} << EOF
-if [ -f "/var/run/yum.pid" ]; then
-    echo "Remove the lock file"
-    kill `cat /var/run/yum.pid`
-    rm -f /var/run/yum.pid
-fi  
-EOF
-    if rpm -q python-nose python-setuptools-devel git-core redhat-lsb ; then
-        echo "Require packages installed."
-    else
-        echo "Require packages not installed."
-        echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
-    fi
-
+    "Ubuntu"|"Debian"|"openSUSE"|"Fedora")
+    source distrib/${DISTRIB_ID}/startup.sh
     ;;
     *)
     zenity --info --text "Sorry, Lazyscripts not support your Distribution. The program will exit"
@@ -195,5 +124,5 @@ echo "export WGET=\"wget --tries=2 --timeout=120 -c\"" >> $ENV_EXPORT_SCRIPT
 
 echo  >> $ENV_EXPORT_SCRIPT
 echo 'rm -rf scripts.list' >> $ENV_EXPORT_SCRIPT
-echo './lzs list build $SCRIPTS_REPO' >> $ENV_EXPORT_SCRIPT
+echo './lzs list build $REPO_URL' >> $ENV_EXPORT_SCRIPT
 echo './lzs $@'  >> $ENV_EXPORT_SCRIPT

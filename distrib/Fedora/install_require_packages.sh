@@ -11,7 +11,6 @@ echo "正在下載與安裝Lazyscripts執行行所需的套件....."
 yum check-update
 yum -y install git-core python-nose python-setuptools-devel redhat-lsb
 
-easy_install GitPython
 
 echo "執行完畢！即將啟動Lazyscripts..."
 
