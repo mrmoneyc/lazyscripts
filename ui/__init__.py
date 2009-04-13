@@ -12,6 +12,7 @@ import xml.sax
 from lazyscripts.script import ScriptsList, ScriptSet, ScriptsRunner
 import lazyscripts.ui.utils
 from lazyscripts import info
+from lazyscripts import get_version
 
 from lazyscripts.ui.gui import query_yes_no, show_error
 from lazyscripts.util import detect
@@ -337,7 +338,7 @@ class MainWin:
     def on_about(self, item ):
         dlg = gtk.AboutDialog()
         dlg.set_name('Lazyscripts')
-        dlg.set_version(VERSION)
+        dlg.set_version(get_version())
         dlg.set_website('http://TBD/')
         if self.icon:
             dlg.set_logo(self.icon)
