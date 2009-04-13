@@ -54,7 +54,7 @@ function choice_repo () {
     DISTRIB_NAME="$DISTRIB_ID"
     AVAILABLE_REPO=($(cat distrib/repository.conf  | grep "${DISTRIB_NAME}" | cut -d " " -f 1 | grep "^[git].*[git]$"))
     if [ ${#AVAILABLE_REPO} -eq 1 ];then
-        REPO_URL=$AVAILABLE_REPO
+        REPO_URL=($AVAILABLE_REPO)
     else
         SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
         USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
