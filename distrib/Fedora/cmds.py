@@ -15,5 +15,5 @@ if __name__ == "__main__" :
     print install_cmd
     print remove_cmd
     print network_config
-    print repo_cofig
+    print repo_config
 
