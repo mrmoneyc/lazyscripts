@@ -86,7 +86,7 @@ case "$DISTRIB_ID" in
             echo "Require packages installed."
         else
             echo "Require packages not installed."
-            echo "distrib/${DISTRIB_ID}/install_require_packages " >> $ENV_EXPORT_SCRIPT
+            echo "distrib/${DISTRIB_ID}/install_require_packages.sh " >> $ENV_EXPORT_SCRIPT
         fi
         
     ;;
