@@ -10,7 +10,7 @@ network_config = ""
 repo_config = ""
 
 
-if __name__ = "__main__"
+if __name__ == "__main__"
     print detect_pack
     print remove_cmd
     print install_cmd
