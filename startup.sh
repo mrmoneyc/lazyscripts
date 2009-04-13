@@ -53,9 +53,13 @@ function choice_repo () {
 #    fi
     DISTRIB_NAME="$DISTRIB_ID"
     AVAILABLE_REPO=($(cat distrib/repository.conf  | grep "${DISTRIB_NAME}" | cut -d " " -f 1 | grep "^[git].*[git]$"))
-    SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
-    USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
-    REPO_URL=($(echo ${USE_REPO/|/ }))
+    if [ ${#AVAILABLE_REPO} -eq 1 ];then
+        REPO_URL=$AVAILABLE_REPO
+    else
+        SHOW_REPO=$(for uri in ${AVAILABLE_REPO[*]} ; do echo -n "FALSE $uri " ; done)
+        USE_REPO=`zenity --list --title="Choice Scripts Repository You Want to Use" --radiolist --column "" --column "Repository URL" ${SHOW_REPO}`
+        REPO_URL=($(echo ${USE_REPO/|/ }))
+    fi
     export REPO_URL
     export REPO_NUM=${#REPO_URL[@]}
     echo "REPO_URL=($(echo ${USE_REPO/|/ }))" >> $ENV_EXPORT_SCRIPT
