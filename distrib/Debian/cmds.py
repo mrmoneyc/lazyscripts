@@ -10,7 +10,7 @@ network_config = "/usr/bin/nm-connection-editor"
 repo_config = "software-properties-gtk"
 
 
-if __name__ == "__main__"
+if __name__ == "__main__" :
     print detect_pack
     print remove_cmd
     print install_cmd
