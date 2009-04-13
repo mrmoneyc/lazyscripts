@@ -16,10 +16,7 @@ from lazyscripts import info
 from lazyscripts.ui.gui import query_yes_no, show_error
 from lazyscripts.util import detect
 distro, codename = info.get_distro()
-if distro == 'Ubuntu':
-    from distrib.Ubuntu import add_official_repos, cmds
-elif distro == 'Debian':
-    from distrib.Debian import add_official_repos, cmds
+exec "from distrib." + distro + " import add_official_repos, syscmds"
 
 
 try:
@@ -78,7 +75,7 @@ def ensure_network ():
        gtk.main_iteration ()
 
     if use_other:
-        os.system(cmds.network_config)
+        os.system(syscmds.network_config)
 
     return detect.test_network ()   # test again after settings
 
@@ -98,7 +95,7 @@ do you want to let lazyscripts modify your software sources?
         # update GUI
         while gtk.events_pending ():
            gtk.main_iteration ()
-        os.system (cmds.repo_config);
+        os.system (syscmds.repo_config);
 
 class Tool:
     def __init__ (self, script, used=True):
