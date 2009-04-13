@@ -92,7 +92,7 @@ case "$DISTRIB_ID" in
     ;;
     "openSUSE")
     export PLAT_NAME="`uname -i`"
-    echo "export PLAT_NAME=\"`uname -i`\"" $ENV_EXPORT_SCRIPT
+    echo "export PLAT_NAME=\"`uname -i`\"" >> $ENV_EXPORT_SCRIPT
 	export SCRIPTS_REPO=$SUSE_SCRIPTS_REPO
 	echo "SCRIPTS_REPO='${SCRIPTS_REPO}'" >> $ENV_EXPORT_SCRIPT
     case $WINDOWMANAGER in
