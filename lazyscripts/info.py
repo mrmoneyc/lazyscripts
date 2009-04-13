@@ -13,8 +13,9 @@ def get_distro():
     name = getoutput(cmd+' -is')
     if name in ('Debian','Ubuntu') :
         code = getoutput(cmd+' -cs')
-    elif name in ('SUSE LINUX') :
+    else :
         code = getoutput(cmd+' -rs')
+
     if name == 'SUSE LINUX' and code in ('11.0','11.1') :
         name = 'openSUSE'
     
