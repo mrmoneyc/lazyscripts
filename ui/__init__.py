@@ -17,9 +17,9 @@ from lazyscripts.ui.gui import query_yes_no, show_error
 from lazyscripts.util import detect
 distro, codename = info.get_distro()
 if distro == 'Ubuntu':
-    from distrib.Ubuntu import add_official_repos
+    from distrib.Ubuntu import add_official_repos, cmds
 elif distro == 'Debian':
-    from distrib.Debian import add_official_repos
+    from distrib.Debian import add_official_repos, cmds
 
 
 try:
@@ -78,7 +78,7 @@ def ensure_network ():
        gtk.main_iteration ()
 
     if use_other:
-        os.system('/usr/bin/nm-connection-editor')
+        os.system(cmds.network_config)
 
     return detect.test_network ()   # test again after settings
 
@@ -89,7 +89,6 @@ do you want to let lazyscripts modify your software sources?
 """)
     if query_yes_no (msg):
         add_official_repos.main ()
-        #os.system ('scripts/add_official_repos.py');
     else:
         show_error (_('Lazyscripts will not change your settings') +
                     _('please ensure your software sources right\n\n') +
@@ -99,7 +98,7 @@ do you want to let lazyscripts modify your software sources?
         # update GUI
         while gtk.events_pending ():
            gtk.main_iteration ()
-        os.system ('software-properties-gtk');
+        os.system (cmds.repo_config);
 
 class Tool:
     def __init__ (self, script, used=True):
@@ -164,7 +163,7 @@ class WelcomePage:
         label.set_markup(
             _('<b><big>Lazyscripts - Linux lazy pack') +
             _('，Linux end user\'s good friend</big></b>\n\n\n') +
-            _('Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy\n\n') +
+            _('Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n\n') +
             _('Project Lazyscripts - ') +
             _('<span color="blue">FIXME: HERE IS WEBSITE URL</span>'))
 
@@ -327,7 +326,7 @@ class MainWin:
         self.complete=False
 
     def confirm_close(self):
-        if self.complete or query_yes_no(_('do you want to quit lazyscripts?'), self.win):
+        if self.complete or query_yes_no(_('Do you want to quit lazyscripts?'), self.win):
             gtk.main_quit()
             return True
         return False
