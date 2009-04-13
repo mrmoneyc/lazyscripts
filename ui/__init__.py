@@ -16,8 +16,10 @@ from lazyscripts import info
 from lazyscripts.ui.gui import query_yes_no, show_error
 from lazyscripts.util import detect
 distro, codename = info.get_distro()
-if distro in ('Ubuntu','Debian') :
-    import distrib.add_official_repos_debian_ubuntu as add_official_repos
+if distro == 'Ubuntu':
+    from distrib.Ubuntu import add_official_repos
+elif distro == 'Debian':
+    from distrib.Debian import add_official_repos
 
 
 try:

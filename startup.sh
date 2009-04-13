@@ -81,7 +81,7 @@ case "$DISTRIB_ID" in
             echo "Require packages installed."
         else
             echo "Require packages not installed."
-            echo "distrib/package_debian_ubuntu.sh" >> $ENV_EXPORT_SCRIPT
+            echo "distrib/${DISTRIB_ID}/install_require_packages " >> $ENV_EXPORT_SCRIPT
         fi
         
     ;;
@@ -109,7 +109,7 @@ case "$DISTRIB_ID" in
         echo "Require packages installed."
     else
         echo "Require packages not installed."
-        echo "distrib/package_opensuse.sh" >> $ENV_EXPORT_SCRIPT
+        echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
     fi 
     ;;
     
@@ -144,7 +144,7 @@ EOF
         echo "Require packages installed."
     else
         echo "Require packages not installed."
-        echo "distrib/package_fedora.sh" >> $ENV_EXPORT_SCRIPT
+        echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
     fi
 
     ;;
