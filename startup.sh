@@ -4,7 +4,7 @@
 
 
 function get_distro_info () {
-if which lsb_release ; then
+if which lsb_release &> /dev/null ; then
     export DISTRIB_ID=`lsb_release -is`
     export DISTRIB_CODENAME=`lsb_release -cs`
     export DISTRIB_VERSION=`lsb_release -rs`
