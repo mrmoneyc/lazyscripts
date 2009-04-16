@@ -163,7 +163,7 @@ class WelcomePage:
             _('，Linux end user\'s good friend</big></b>\n\n\n') +
             _('Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n\n') +
             _('Project Lazyscripts - ') +
-            _('<span color="blue">FIXME: HERE IS WEBSITE URL</span>'))
+            _('<span color="blue">http://sites.google.com/site/lazyscripts/</span>'))
 
         view.add(label)
         view.show_all()
