@@ -25,7 +25,7 @@ if [ -f "/var/run/yum.pid" ]; then
 fi  
 EOF
 
-if rpm -q python-nose python-setuptools-devel git-core redhat-lsb &> /dev/null ; then
+if rpm -q wget python-nose python-setuptools-devel git-core redhat-lsb &> /dev/null ; then
     echo "Require packages installed."
 else
     echo "Require packages not installed."
