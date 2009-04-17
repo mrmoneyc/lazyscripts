@@ -13,31 +13,21 @@ export ARCH_NAME="`uname -i`"
 echo "正在下載並安裝lazyscripts執行所需的套件...."
 
 zypper ref
-zypper -n install git-core python-setuptools-devel
+zypper -n install git-core python-setuptools-devel python-nose
 
-case $ARCH_NAME in
-
-i386)
-
-zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
-
+#case $ARCH_NAME in
+#i386)
+#zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
 # zypper install http://lazyscripts.googlecode.com/files/python-git-lastest.i586.rpm
-
-;;
-
-x86_64)
-
-zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
-
+#;;
+#x86_64)
+#zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
 # zypper install http://lazyscripts.googlecode.com/files/python-git-lastest.x86_64.rpm
-
-;;
-
-*)
-
-echo "抱歉，Lazyscripts並不支援 ${ARCH_NAME} 作業系統平台。"
-;;
-esac
+#;;
+#*)
+#echo "抱歉，Lazyscripts並不支援 ${ARCH_NAME} 作業系統平台。"
+#;;
+#esac
 
 echo "執行完畢！即將啟動Lazyscripts..."
 
