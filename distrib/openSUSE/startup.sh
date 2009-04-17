@@ -21,6 +21,13 @@ case $WINDOWMANAGER in
     echo "export WIN_MGR=\"\"" >> $ENV_EXPORT_SCRIPT
     ;;
 esac
+
+cat >> $ENV_EXPORT_SCRIPT << EOF
+if pgrep packagekitd ; then 
+    killall packagekitd 
+fi
+EOF
+
 if rpm -q python-nose python-setuptools git-core &> /dev/null ; then 
     echo "Require packages installed."
 else
@@ -43,3 +50,4 @@ else
         echo "sorry, not support $PLAT_NAME"
     esac
 fi
+
