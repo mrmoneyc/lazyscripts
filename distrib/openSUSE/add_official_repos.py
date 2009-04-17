@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import os
-from lazyscripts import get_version
+from lazyscripts import info
 
 def main():
-    distro, codename = get_version()
+    distro, codename = info.get_distro()
     comps = [ "oss", "non-oss" ]
     for comps in comps:
 
