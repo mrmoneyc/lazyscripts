@@ -28,7 +28,7 @@ else
     echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
 fi
 
-if python -c "import imp;imp.find_module('git')" &> /dev/null
+if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
     echo "Require module found."
 else
     echo "Require module not found."
