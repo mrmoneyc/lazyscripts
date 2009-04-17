@@ -13,13 +13,13 @@ export ARCH_NAME="`uname -i`"
 echo "正在下載並安裝lazyscripts執行所需的套件...."
 
 zypper ref
-zypper -l --yes install git git-core python-setuptools
+zypper -n install git git-core python-setuptools
 
 case $ARCH_NAME in
 
 i386)
 
-zypper -l --yes install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
+zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
 
 # zypper install http://lazyscripts.googlecode.com/files/python-git-lastest.i586.rpm
 
@@ -27,7 +27,7 @@ zypper -l --yes install http://lazyscripts.googlecode.com/files/python-nose-last
 
 x86_64)
 
-zypper -l --yes install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
+zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
 
 # zypper install http://lazyscripts.googlecode.com/files/python-git-lastest.x86_64.rpm
 

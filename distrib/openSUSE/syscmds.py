@@ -4,8 +4,8 @@ Here store the command which only in openSUSE
 """
 
 detect_pack = "rpm -q "
-install_cmd = "zypper -l --yes install "
-remove_cmd = "zypper --yes remove "
+install_cmd = "zypper -n install "
+remove_cmd = "zypper -n remove "
 network_config = ""
 repo_config = ""
 
