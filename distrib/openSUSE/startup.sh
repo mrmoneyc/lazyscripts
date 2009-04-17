@@ -21,7 +21,7 @@ case $WINDOWMANAGER in
     echo "export WIN_MGR=\"\"" >> $ENV_EXPORT_SCRIPT
     ;;
 esac
-if rpm -q python-nose python-setuptools git-core &> /dev/null ; then 
+if rpm -q python-nose python-setuptools-devel git-core &> /dev/null ; then 
     echo "Require packages installed."
 else
     echo "Require packages not installed."
