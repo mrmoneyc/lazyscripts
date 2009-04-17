@@ -37,7 +37,7 @@ else
         echo "easy_install -d /usr/lib/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
         ;;
         x86_64)
-        echo "easy_instalil -d /usr/lib64/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
+        echo "easy_install -d /usr/lib64/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
         ;;
         *)
         echo "sorry, not support $PLAT_NAME"
