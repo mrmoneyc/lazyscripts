@@ -5,6 +5,8 @@ TOP_DIR=`pwd`
 pushd /tmp
 
 if rpm -q wget &> /dev/null ; then
+    echo "wget has been installed"
+else
     yum check-update
     yum -y install wget
 fi
