@@ -14,7 +14,7 @@ echo "正在下載並安裝lazyscripts執行所需的套件...."
 
 zypper -n install git-core python-setuptools 
 zypper ref
-if zypper se python-nose &> /dev/null ; then
+if zypper se python-nose | grep "python-nose" &> /dev/null ; then
     zypper -n install python-nose
 else
     case $ARCH_NAME in
