@@ -16,11 +16,21 @@ cd $TMPDIR
 
 echo "正在下載並安裝Lazyscripts執行所需的套件...."
 
-source /etc/profile
+echo "Check for required packsges..."
+if dpkg -l python-nose python-setuptools git-core &> /dev/null ; then
+    echo "Require packages installed."
+else
+    echo "Require packages not installed."
+    apt-get update
+    apt-get -y --force-yes install git-core python-setuptools python-nose make
+fi
 
-apt-get update
-apt-get -y --force-yes install git-core python-setuptools python-nose make
-easy_install GitPython
+if python -c "import imp;imp.find_module('git')" &> /dev/null
+    echo "Require module found."
+else
+    echo "Require module not found."
+    echo "easy_install GitPython" >> $ENV_EXPORT_SCRIPT
+fi
 
 cd $TOPDIR
 

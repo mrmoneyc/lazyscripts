@@ -17,24 +17,5 @@ fi
 WIN_MGR=`zenity --list --title="Choice your window manager" --radiolist --column "" --column "Linux Distribution Version" FALSE "Gnome" FALSE "KDE"`
 export WIN_MGR=${WIN_MGR}
 echo "export WIN_MGR=${WIN_MGR}" >> $ENV_EXPORT_SCRIPT
-cat >> ${ENV_EXPORT_SCRIPT} << EOF
-if [ -f "/var/run/yum.pid" ]; then
-    echo "Remove the lock file"
-    kill `cat /var/run/yum.pid`
-    rm -f /var/run/yum.pid
-fi  
-EOF
 
-if rpm -q wget python-nose python-setuptools-devel git-core redhat-lsb &> /dev/null ; then
-    echo "Require packages installed."
-else
-    echo "Require packages not installed."
-    echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT
-fi
-
-if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
-    echo "Require module found."
-else
-    echo "Require module not found."
-    echo "easy_install GitPython" >> $ENV_EXPORT_SCRIPT
-fi
+echo "distrib/${DISTRIB_ID}/install_require_packages.sh" >> $ENV_EXPORT_SCRIPT

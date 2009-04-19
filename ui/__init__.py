@@ -17,7 +17,7 @@ from lazyscripts import get_version
 from lazyscripts.ui.gui import query_yes_no, show_error
 from lazyscripts.util import detect
 distro, codename = info.get_distro()
-exec "from distrib." + distro + " import add_official_repos, syscmds"
+exec "from lazyscripts.distro." + distro + " import add_official_repos, syscmds"
 
 
 try:

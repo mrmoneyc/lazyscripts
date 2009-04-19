@@ -77,12 +77,12 @@ DIR=`dirname $0`
 cd "$DIR"
 
 init_export_script
-get_distro_info
 
+get_distro_info
 
 case "$DISTRIB_ID" in
     "Ubuntu"|"Debian"|"openSUSE"|"Fedora")
-    source distrib/${DISTRIB_ID}/startup.sh
+    source bin/${DISTRIB_ID}/startup.sh
     ;;
     *)
     zenity --info --text "Sorry, Lazyscripts not support your Distribution. The program will exit"
