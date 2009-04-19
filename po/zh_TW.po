@@ -89,7 +89,7 @@ msgstr ""
 
 #: ui/__init__.py:203
 msgid ""
-"Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy\n"
+"Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n"
 "\n"
 msgstr ""
 "Copyright (C) 2009, 由 Lazyscripts 開發者共同設計、開發\n"
@@ -121,7 +121,7 @@ msgid "fininsh"
 msgstr "結束"
 
 #: ui/__init__.py:413
-msgid "do you want to quit lazyscripts?"
+msgid "Do you want to quit lazyscripts?"
 msgstr "你是否要離開 Lazyscripts 懶人包？"
 
 #: ui/__init__.py:435

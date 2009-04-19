@@ -78,7 +78,7 @@ msgstr ""
 
 #: ui/__init__.py:203
 msgid ""
-"Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy\n"
+"Copyright (C) 2007, Design and developed by PCMan, Yuren Ju, hychen and billy3321\n"
 "\n"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgid "fininsh"
 msgstr ""
 
 #: ui/__init__.py:413
-msgid "do you want to quit lazyscripts?"
+msgid "Do you want to quit lazyscripts?"
 msgstr ""
 
 #: ui/__init__.py:435
