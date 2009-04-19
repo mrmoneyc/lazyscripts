@@ -52,7 +52,7 @@ function choice_repo () {
 #        DISTRIB_NAME="$DISTRIB_ID"
 #    fi
     DISTRIB_NAME="$DISTRIB_ID"
-    AVAILABLE_REPO=($(cat distrib/repository.conf  | grep "${DISTRIB_NAME}" | cut -d " " -f 1 | grep "^[git].*[git]$"))
+    AVAILABLE_REPO=($(cat conf/repository.conf  | grep "${DISTRIB_NAME}" | cut -d " " -f 1 | grep "^[git].*[git]$"))
     if [ ${#AVAILABLE_REPO[@]} -eq 1 ];then
         USE_REPO=(${AVAILABLE_REPO})
         REPO_URL=(${AVAILABLE_REPO})
