@@ -67,7 +67,7 @@ excute tests and display error output.
 
     user@host $ make devtest
 
-Fetch Scripts Repositry To Local Machain.
+Fetch Scripts Repository To Local Machain.
 ========================================
 
     user@host $ make fetch
@@ -76,9 +76,25 @@ How to build a scripts list file
 ================================
 
 type this command, and this means that creating a new scripts list file 
-for the remote git repositry whch has updated. 
+for the remote git repository whch has updated. 
 
-now, the official repositry is mantianed by billy.
+now, the official repository is mantianed by billy.
 
 $ ./lzs list build git://github.com/billy3321/lazyscripts_pool_debian_ubuntu.git
+
+How to Make Lazyscripts Support a Distribution
+==============================================
+
+Lazyscripts now place distribution relative config in two place: bin/ and lazyscripts/distro/.
+
+bin/ directory place 2 shell scripts file, startup.sh and install_required_packages.sh. 
+startup.sh ia use to determine the OS platform in PLAT_NAME variables, and WIN_MGR variables as window manager.
+The install_required_packages.sh will check if the required packages and GitPython modules install correctly. If
+not, the script will install it.
+
+lazyscripts/distro/ directory place 2 python modules which will import while in need. There has 2 modules, syscmds.py
+and add_official_repos.py. syscmds.py is include the command which can run in system, such as network config, or
+packages repository config. add_official_repos.py will run for replace packages repository as faster local mirror.
+
+After all, add the name of your distribution into slzs and startup.sh. Lazyscripts will support your distribution fine.
 
