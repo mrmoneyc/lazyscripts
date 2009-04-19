@@ -41,7 +41,7 @@ control our codes, you always play git as you are a lazyscripts developer
 
 installation in debian or ubuntu.
 
-    root@host # apt-get install git
+    root@host # apt-get install git-core
 
 GitPytyhon Installation
 =======================
