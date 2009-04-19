@@ -12,7 +12,7 @@ else
 fi
 
 case $PLAT_NAME in
-    x86_64|i386)
+    "x86_64"|"i386")
     wget http://lazyscripts.googlecode.com/files/libgksu-lastest.${PLAT_NAME}.rpm
     wget http://lazyscripts.googlecode.com/files/gksu-lastest.${PLAT_NAME}.rpm
 #    yum -y --nogpgcheck localinstall libgksu-lastest.${PLAT_NAME}.rpm gksu-lastest.${PLAT_NAME}.rpm
