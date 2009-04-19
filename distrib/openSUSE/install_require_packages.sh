@@ -8,7 +8,7 @@
 # Please run as root.
 
 
-export ARCH_NAME="`uname -i`"
+export PLAT_NAME="`uname -i`"
 
 echo "正在下載並安裝lazyscripts執行所需的套件...."
 
@@ -17,11 +17,11 @@ zypper ref
 if zypper se python-nose | grep "python-nose" &> /dev/null ; then
     zypper -n install python-nose
 else
-    case $ARCH_NAME in
-        i386)
+    case $PLAT_NAME in
+        "i386")
             zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.i586.rpm
         ;;
-        x86_64)
+        "x86_64")
             zypper -n install http://lazyscripts.googlecode.com/files/python-nose-lastest.x86_64.rpm
         ;;
         *)

@@ -40,10 +40,10 @@ if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
 else
     echo "Require module not found."
     case $PLAT_NAME in
-        i386)
+        "i386")
         echo "easy_install -d /usr/lib/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
         ;;
-        x86_64)
+        "x86_64")
         echo "easy_install -d /usr/lib64/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
         ;;
         *)
