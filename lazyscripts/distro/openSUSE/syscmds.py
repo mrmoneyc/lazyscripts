@@ -2,12 +2,18 @@
 """
 Here store the command which only in openSUSE
 """
+import os
 
 detect_pack = "rpm -q "
 install_cmd = "zypper -n install "
 remove_cmd = "zypper -n remove "
-network_config = ""
-repo_config = ""
+
+if os.environ['WIN_MGR'] == 'Gnome':
+    network_config = "/usr/bin/nm-connection-editor"
+elif  os.environ['WIN_MGR'] == 'KDE':
+    network_config = ""
+
+repo_config = "yast2 repositories"
 
 
 if __name__ == "__main__" :
