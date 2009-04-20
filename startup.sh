@@ -93,8 +93,10 @@ case "$DISTRIB_ID" in
     ;;
 esac
 
+
 # get scripts from github
-REPO_URL=`cat conf/repository.conf`
+# REPO_URL=`cat conf/repository.conf`
+choice_repo
 REPO_DIR="./scriptspoll/`./lzs repo sign $REPO_URL`"
 git clone "$REPO_URL" "$REPO_DIR"
 
