@@ -6,7 +6,7 @@
 
 # update lazyscripts.
 
-. startup.sh
+source startup.sh
 
 # run Lazyscripts with root access
 case $DISTRIB_ID in

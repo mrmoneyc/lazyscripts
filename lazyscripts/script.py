@@ -9,13 +9,7 @@ import os
 from lazyscripts.repo import git, create_scriptrepo, sign_repopath
 from lazyscripts import meta
 from lazyscripts.category import Category
-
-def create_file(content, path):
-    file = open(path, 'w')
-    if content:
-        file.write(content)
-    os.chmod(path, 0755)
-    return file
+#from lazyscripts.util import osapi
 
 class ScriptMeta(object):
 
@@ -96,6 +90,8 @@ class Script(object):
         self.hide = script_meta.hide
         self.debian = script_meta.debian
         self.ubuntu = script_meta.ubuntu
+        # is it selected?
+        self.selected = False
 
     def __getattr__(self, key):
         try:
@@ -126,7 +122,7 @@ class Script(object):
         create a excutabel file.
         """
         path = dir_path+self.id
-        create_file(self.data, path)
+        osapi.create_excuteablefile(self.data, path)
 
         for subscript in self.get_subscripts():
             subscript.save(dir_path)
@@ -137,7 +133,12 @@ class Script(object):
         cat_tree = repo.get(list_entry['category'])
         if not cat_tree:
             return None
-        return cls.from_blob(cat_tree.get(list_entry['id']))
+        script =  cls.from_blob(cat_tree.get(list_entry['id']))
+
+        if list_entry.has_key ('selected'):
+            script.selected = list_entry['selected']
+
+        return script
 
     @classmethod
     def from_tree(cls, tree):
@@ -213,7 +214,7 @@ class ScriptSet(object):
         return self._repos.get(repo_path)
 
     @classmethod
-    def from_scriptslist(cls, scripts_list):
+    def from_scriptslist(cls, scripts_list, testmode=False):
         """
         get script set from source list.
         """
@@ -226,7 +227,11 @@ class ScriptSet(object):
         for item in scripts_list.items():
             if not set._repos.has_key(item.get('repo')):
                 # clone the repostiry if the repositry is not exists.
-                set._repos[item.get('repo')] = create_scriptrepo(item.get('repo'), 'scriptspoll')
+                if testmode:
+                    local_dir = 't/datas/scriptspoll'
+                else:
+                    local_dir = 'scriptspoll'
+                set._repos[item.get('repo')] = create_scriptrepo(item.get('repo'), local_dir)
 
             if not set._repo_table.get(item.get('repo')):
                 set._repo_table[item.get('repo')] = []
@@ -297,10 +302,8 @@ class ScriptsList(object):
                         'repo':repo_path,
                         'category':category.name,
                          'name':script.name,
-                         'id':script_name}
-                #TODO please fix me
-                #if category.name == 'Common':
-                #    entry['selected'] == 'y'
+                         'id':script_name,
+                         'selected':False}
                 list._items.append(entry)
         return list
 
@@ -337,7 +340,7 @@ class ScriptsRunner:
             script.save(self.tmp_dirname+'/')
         excute_entries.append("chown -R $REAL_USER: $REAL_HOME &> /dev/null\n")
 
-        startup_file = self._create_file(self.startup_path)
+        startup_file = osapi.create_excuteablefile(self.startup_path)
         startup_file.writelines(excute_entries)
 
     def _init_tmpdir(self):
@@ -348,13 +351,3 @@ class ScriptsRunner:
             import shutil
             shutil.rmtree(self.tmp_dirname)
         os.mkdir(self.tmp_dirname, 0777)
-
-    def _create_file(self, path, content=None):
-        """
-        create a excutabel file.
-        """
-        file = open(path, 'w')
-        if content:
-            file.write(content)
-        os.chmod(path, 0755)
-        return file

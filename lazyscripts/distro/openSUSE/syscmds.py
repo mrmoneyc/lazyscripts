@@ -11,7 +11,7 @@ remove_cmd = "zypper -n remove "
 if os.environ['WIN_MGR'] == 'Gnome':
     network_config = "/usr/bin/nm-connection-editor"
 elif  os.environ['WIN_MGR'] == 'KDE':
-    network_config = ""
+    network_config = "/usr/sbin/NetworkManager"
 
 repo_config = "yast2 repositories"
 

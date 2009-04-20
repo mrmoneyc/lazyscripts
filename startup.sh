@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 # This is a startup file for Lazyscripts
 
-
+# the function use to get distribution name and version or codename.
 function get_distro_info () {
 if which lsb_release &> /dev/null ; then
     export DISTRIB_ID=`lsb_release -is`
@@ -18,12 +18,15 @@ if which lsb_release &> /dev/null ; then
     echo "export DISTRIB_CODENAME=`lsb_release -cs`" >> "$ENV_EXPORT_SCRIPT"
     echo "export DISTRIB_VERSION=`lsb_release -rs`" >> "$ENV_EXPORT_SCRIPT"
     echo "export DISTRIB_ID=`lsb_release -is`" >> "$ENV_EXPORT_SCRIPT"
+
 elif grep "Fedora" /etc/issue ; then
+    # Fedora does not install lsb (redhat-lsb) in default setting so detect /etc/issue or let user choice...
     export DISTRIB_ID="Fedora"
     echo "export DISTRIB_CODENAME=\"Fedora\"" >> "$ENV_EXPORT_SCRIPT"
     export DISTRIB_CODENAME=""
     export DISTRIB_VERSION=""
 else
+# Let user choice by them self.
     echo "Sorry, Lazyscripts can't distinguish your Linux distribution."
     echo "Please choice your distribution in the list."
     zenity --info --text "Sorry, Lazyscripts can't distinguish your Linux distribution. Please choice your distribution in the list by your self.\n      \nNote: If you can't find your Linux distribution in the list, It means Lazyscripts not support your distribution. Please contact develpers. http://code.google.com/p/lazyscripts/"
@@ -45,12 +48,9 @@ function init_export_script () {
     echo "#!/bin/bash" > "$ENV_EXPORT_SCRIPT"
 }
 
+# the function is use to show a repository list if has more then one repository.
+# store in $REPO_URL as array and $REPO_NUM as number.
 function choice_repo () {
-#    if [ "$DISTRIB_ID" == "SUSE LINUX" ] ; then
-#        DISTRIB_NAME="openSUSE"
-#    else
-#        DISTRIB_NAME="$DISTRIB_ID"
-#    fi
     DISTRIB_NAME="$DISTRIB_ID"
     AVAILABLE_REPO=($(cat conf/repository.conf  | grep "${DISTRIB_NAME}" | cut -d " " -f 1 | grep "^[git].*[git]$"))
     if [ ${#AVAILABLE_REPO[@]} -eq 1 ];then
@@ -72,7 +72,8 @@ function choice_repo () {
     done
     echo "export REPO_DIR" >> $ENV_EXPORT_SCRIPT
 }
-            
+
+# some workaround
 DIR=`dirname $0`
 cd "$DIR"
 
@@ -85,13 +86,17 @@ case "$DISTRIB_ID" in
     source bin/${DISTRIB_ID}/startup.sh
     ;;
     *)
+    #else
     zenity --info --text "Sorry, Lazyscripts not support your Distribution. The program will exit"
     rm ${ENV_EXPORT_SCRIPT}
     exit
     ;;
 esac
 
-choice_repo
+# get scripts from github
+REPO_URL=`cat conf/repository.conf`
+REPO_DIR="./scriptspoll/`./lzs repo sign $REPO_URL`"
+git clone "$REPO_URL" "$REPO_DIR"
 
 # check the path of desktop dir
 XDG_USER_DIRS=~/.config/user-dirs.dirs
@@ -126,8 +131,8 @@ echo "export REAL_HOME=\"$HOME\"" >> $ENV_EXPORT_SCRIPT
 export WGET="wget --tries=2 --timeout=120 -c"
 echo "export WGET=\"wget --tries=2 --timeout=120 -c\"" >> $ENV_EXPORT_SCRIPT
 
+# a blank line
+echo >> $ENV_EXPORT_SCRIPT
 
-echo  >> $ENV_EXPORT_SCRIPT
-echo 'rm -rf scripts.list' >> $ENV_EXPORT_SCRIPT
-echo "./lzs list build $REPO_URL" >> $ENV_EXPORT_SCRIPT
+# FIXME: export-env just using to pass envirnoment variables, please don't use any command in it.
 echo './lzs $@'  >> $ENV_EXPORT_SCRIPT
