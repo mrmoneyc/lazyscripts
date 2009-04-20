@@ -21,3 +21,10 @@ def get_distro():
     
     return (name,code)
 
+def get_distro_name():
+    """
+    get distrobution name only.
+    """
+    (name, code) = get_distro
+    return name
+

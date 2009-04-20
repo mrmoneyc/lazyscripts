@@ -16,8 +16,8 @@ from lazyscripts import get_version
 
 from lazyscripts.ui.gui import query_yes_no, show_error
 from lazyscripts.util import detect
-distro, codename = info.get_distro()
-exec "from lazyscripts.distro." + distro + " import add_official_repos, syscmds"
+distro_name = info.get_distro_name()
+exec "from lazyscripts.distro." + distro_name + " import add_official_repos, syscmds"
 
 
 try:
@@ -80,7 +80,7 @@ def ensure_network ():
 
     return detect.test_network ()   # test again after settings
 
-def ensure_apt_sources():
+def ensure_package_sources():
     msg =_("""
 we need to modify your software sources,
 do you want to let lazyscripts modify your software sources?
@@ -397,7 +397,7 @@ class GUI:
             show_error (_("no avalible internet connection, lazyscripts cannot execute."), _("error"))
             exit(1)
 
-        ensure_apt_sources ()
+        ensure_package_sources ()
         MainWin()
         gtk.main()
 
