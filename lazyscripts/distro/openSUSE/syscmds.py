@@ -13,7 +13,7 @@ if os.environ['WIN_MGR'] == 'Gnome':
 elif  os.environ['WIN_MGR'] == 'KDE':
     network_config = "/usr/sbin/NetworkManager"
 
-repo_config = "yast2 repositories"
+repo_config = "/sbin/yast2 repositories"
 
 
 if __name__ == "__main__" :
