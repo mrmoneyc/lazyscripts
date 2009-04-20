@@ -9,6 +9,8 @@ __reserved_words__ = [
     'author',
     'ubuntu',
     'debian',
+    'fedora',
+    'opensuse',
     'platform',
     'license',
     'child',
@@ -76,6 +78,12 @@ def debian_mark(value):
 
 def ubuntu_mark(value):
     return ('ubuntu', True)
+
+def opensuse_mark(value):
+    return ('opensuse', True)
+
+def fedora_mark(value):
+    return ('fedora', True)
 
 def hide_mark(value):
     return ('hide', True)
