@@ -25,7 +25,7 @@ else
     apt-get -y --force-yes install git-core python-setuptools python-nose make
 fi
 
-if python -c "import imp;imp.find_module('git')" &> /dev/null
+if python -c "import imp;imp.find_module('git')" &> /dev/null ; then
     echo "Require module found."
 else
     echo "Require module not found."
