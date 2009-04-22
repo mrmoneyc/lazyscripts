@@ -125,7 +125,7 @@ class Script(object):
         create a excutabel file.
         """
         path = dir_path+self.id
-        osapi.create_excuteablefile(self.data, path)
+        osapi.create_excuteablefile(path, self.data)
 
         for subscript in self.get_subscripts():
             subscript.save(dir_path)
