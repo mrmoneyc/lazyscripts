@@ -38,7 +38,7 @@ fi
 
 function init_export_script () {
     mkdir -p tmp
-    ENV_EXPORT_SCRIPT="tmp/env-export.sh"
+    export ENV_EXPORT_SCRIPT="tmp/env-export.sh"
     if [ -f ${ENV_EXPORT_SCRIPT} ];then
         rm $ENV_EXPORT_SCRIPT
     fi
