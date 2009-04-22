@@ -10,6 +10,9 @@ from lazyscripts.repo import git, create_scriptrepo, sign_repopath
 from lazyscripts import meta
 from lazyscripts.category import Category
 from lazyscripts.util import osapi
+from lazyscripts import info
+distro_name = info.get_distro_name()
+exec "from lazyscripts.distro." + distro_name + " import syscmds"
 
 class ScriptMeta(object):
 
@@ -337,13 +340,13 @@ class ScriptsRunner:
         excute_entries = [ 
             '#!/bin/bash\n'
             'cd '+self.tmp_dirname+'\n'
-            'apt-get update\n' ]
+            + syscmds.refresh_cmd + '\n' ]
 
         for script in scripts:
             excute_entries.append("%s/%s\n" % 
                                     (self.tmp_dirname, script.id))
             script.save(self.tmp_dirname+'/')
-        excute_entries.append("chown -R $REAL_USER: $REAL_HOME &> /dev/null\n")
+        excute_entries.append("chown -R ${REAL_USER}:${REAL_HOME} &> /dev/null\n")
 
         startup_file = osapi.create_excuteablefile(self.startup_path)
         startup_file.writelines(excute_entries)
