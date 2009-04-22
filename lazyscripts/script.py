@@ -263,7 +263,7 @@ class ScriptsList(object):
         if path:
             self.path = path
         else:
-            self.path = 'script.list'
+            self.path = 'scripts.list'
         self.content = ''
         self._items = []
 
