@@ -71,11 +71,12 @@ case "$DISTRIB_ID" in
     ;;
 esac
 
+# This is a developer function use to select testing repo.
+source devtools/devstartup.sh
+select_repo
 
 # get scripts from github
 # REPO_URL=`cat conf/repository.conf`
-source devtools/devstartup.sh
-select_repo
 # REPO_DIR="./scriptspoll/`./lzs repo sign $REPO_URL`"
 # git clone "$REPO_URL" "$REPO_DIR"
 
