@@ -43,10 +43,10 @@ else
     echo "Require module not found."
     case $PLAT_NAME in
         "i386")
-        echo "easy_install -d /usr/lib/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
+        easy_install -d /usr/lib/python2.6/site-packages GitPython
         ;;
         "x86_64")
-        echo "easy_install -d /usr/lib64/python2.6/site-packages GitPython" >> $ENV_EXPORT_SCRIPT
+        easy_install -d /usr/lib64/python2.6/site-packages GitPython
         ;;
         *)
         echo "sorry, not support $PLAT_NAME"
