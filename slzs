@@ -25,7 +25,7 @@ case $DISTRIB_ID in
         gnomesu --command="tmp/env-export.sh $@"
         ;;
         'KDE')
-        kdesu --command="tmp/env-export.sh $@"
+        kdesu -c "tmp/env-export.sh $@"
         ;;
     esac
     ;;
