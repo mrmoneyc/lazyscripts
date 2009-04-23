@@ -19,6 +19,9 @@ function select_repo () {
     echo "export REPO_NUM=${#REPO_URL[@]}" >> $ENV_EXPORT_SCRIPT
     for ((num=0;num<${REPO_NUM};num=$num+1)); do 
         REPO_DIR[$num]="./scriptspoll/`./lzs repo sign ${REPO_URL[${num}]}`"
+        if [ -d ${REPO_DIR[$num]} ];then
+            rm -rf ${REPO_DIR[$num]}
+        fi
         git clone ${REPO_URL[$num]} ${REPO_DIR[$num]}
         echo "./lzs list build ${REPO_URL[$num]}" >> $ENV_EXPORT_SCRIPT
     done
